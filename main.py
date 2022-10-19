@@ -67,7 +67,7 @@ print(cursor.fetchall())
 
 #
 cursor.execute('''
-
+select * from Timing
 ''')
 print(cursor.fetchall())
 
