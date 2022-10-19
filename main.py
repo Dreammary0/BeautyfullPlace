@@ -12,8 +12,7 @@ cursor = con.cursor()
 # выбираем и выводим записи из таблиц author, reader
 
 
-
-#Вывести услуги для процедуры Парикмахер
+print("1.1 Вывести услуги для процедуры Парикмахер")
 cursor.execute("""SELECT ProcedureListName , ProcedurePrice, P.ProcedureName  
 FROM ProcedureList
 JOIN "Procedure" P on P.IDProcedure = ProcedureList.Procedure_IDProcedure 
@@ -22,7 +21,7 @@ order by ProcedurePrice ASC
 """)
 print(cursor.fetchall())
 
-# Вывести мастеров маникюра
+print("1.2 Вывести мастеров процедуры")
 cursor.execute("""
 SELECT MasterName , P.ProcedureName
 FROM Master
@@ -32,7 +31,8 @@ ORDER BY MasterName ASC
 """)
 print(cursor.fetchall())
 
-#Сколько процедур у каждой услуги
+
+print("2.1 Сколько процедур у каждой услуги")
 cursor.execute("""
 Select P.ProcedureName, count(IDProcedureList) 
 from ProcedureList 
@@ -41,7 +41,7 @@ GROUP BY P.ProcedureName
 """)
 print(cursor.fetchall())
 
-#какие даты есть у мастера
+print("2.1 Какие даты есть у мастера")
 cursor.execute('''
 select Date, StartTime, EndTime, M.MasterName, P.ProcedureName
 from Schedule
@@ -53,7 +53,7 @@ GROUP BY Date
 print(cursor.fetchall())
 
 
-#самая дорогая процедура
+print("3.1 Самая дорогая процедура")
 cursor.execute('''
 with test as (select IDProcedureList, max(ProcedurePrice) as price from ProcedureList)
 select P2.ProcedureName, P.ProcedureListName, t.price
@@ -65,9 +65,14 @@ where P.IDProcedureList = t.IDProcedureList
 print(cursor.fetchall())
 
 
-#
+print("3.2 Вывести доступные варианты записи на процедуру 1 после 18:00 и мастеров")
 cursor.execute('''
-select * from Timing
+with night as (select * from OrderList where Procedure_IDProcedure=1 and OrderTime>=18 and Client_IDClient is NULL)
+select IDOrder, P.ProcedureName, OrderData, OrderTime,M.MasterName, M.MasterPhone 
+from night
+join Schedule S on night.Schedule_IDSchedule=S.IDSchedule
+join Master M on S.Master_IDMaster=M.IDMaster
+join Procedure P on M.Procedure_IDProcedure=P.IDProcedure
 ''')
 print(cursor.fetchall())
 
