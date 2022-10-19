@@ -76,22 +76,6 @@ join Procedure P on M.Procedure_IDProcedure=P.IDProcedure
 ''')
 print(cursor.fetchall())
 
-#
-cursor.execute('''
-select * from OrderList
-''')
-print(cursor.fetchall())
-
-print("3.2 Вывести доступные варианты записи на процедуру 1 после 18:00 и мастеров")
-cursor.execute('''
-with night as (select * from OrderList where Procedure_IDProcedure=1 and OrderTime>=18 and Client_IDClient is NULL)
-select IDOrder, P.ProcedureName, OrderData, OrderTime,M.MasterName, M.MasterPhone 
-from night
-join Schedule S on night.Schedule_IDSchedule=S.IDSchedule
-join Master M on S.Master_IDMaster=M.IDMaster
-join Procedure P on M.Procedure_IDProcedure=P.IDProcedure
-''')
-print(cursor.fetchall())
 
 print("4.1 Добавить клиента Андрей")
 cursor.executescript('''
@@ -99,13 +83,10 @@ INSERT INTO Client ("IDClient","ClientName","ClientPhone")
 VALUES (null, 'Андрей','556374')
 ''')
 
-print("Добавить клиента Андрей")
+print("4.2 Записать клиента на процедуру")
 cursor.executescript('''
-INSERT INTO Client ("IDClient","ClientName","ClientPhone") 
-VALUES (null, 'Андрей','556374')
+UPDATE OrderList SET Client_IDClient = 1 WHERE IDOrder=1
 ''')
-
-
 
 # закрываем соединение с базой
 con.close()
