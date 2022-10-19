@@ -4,9 +4,9 @@ f_damp = open('Beauty.sql','r', encoding ='utf-8-sig')
 damp = f_damp.read()
 f_damp.close()
 # запускаем запросы
-con.executescript(damp)
+#con.executescript(damp)
 # сохраняем информацию в базе данных
-con.commit()
+#con.commit()
 # создаем курсор
 cursor = con.cursor()
 # выбираем и выводим записи из таблиц author, reader
@@ -82,6 +82,28 @@ select * from OrderList
 ''')
 print(cursor.fetchall())
 
+print("3.2 Вывести доступные варианты записи на процедуру 1 после 18:00 и мастеров")
+cursor.execute('''
+with night as (select * from OrderList where Procedure_IDProcedure=1 and OrderTime>=18 and Client_IDClient is NULL)
+select IDOrder, P.ProcedureName, OrderData, OrderTime,M.MasterName, M.MasterPhone 
+from night
+join Schedule S on night.Schedule_IDSchedule=S.IDSchedule
+join Master M on S.Master_IDMaster=M.IDMaster
+join Procedure P on M.Procedure_IDProcedure=P.IDProcedure
+''')
+print(cursor.fetchall())
+
+print("4.1 Добавить клиента Андрей")
+cursor.executescript('''
+INSERT INTO Client ("IDClient","ClientName","ClientPhone") 
+VALUES (null, 'Андрей','556374')
+''')
+
+print("Добавить клиента Андрей")
+cursor.executescript('''
+INSERT INTO Client ("IDClient","ClientName","ClientPhone") 
+VALUES (null, 'Андрей','556374')
+''')
 
 
 
