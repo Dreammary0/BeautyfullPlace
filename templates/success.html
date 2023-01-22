@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись в салон</title>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_for_menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/frame_style.css"/>
+
+    <link href="static/icon.png" rel="icon" type="image/x-icon">
+
+</head>
+<body>
+<div class=menu>
+    <ul>
+        <li><a href={{ url_for("index") }}>Выбрать услугу</a></li>
+        <li><a> Выбрать мастера</a></li>
+        <li><a>Выбрать время</a></li>
+        <li><a>Проверьте данные </a></li>
+        <li class="active"><a> Выход </a></li>
+
+    </ul>
+</div>
+
+<form id="main" method="get" class="decor" method="get">
+    <div class="form-inner">
+        <h3><b>{{ name }}!</b></h3>
+        <p>Спасибо за обращение.</p>
+        <p>Ждем вас по адрессу <b>г.Владивосток, ул. Тихоокенская, 1а </b>- вход со двора.</p>
+        <input type="submit" class="button_1" name="exit" value="Завершить">
+    </div>
+
+</form>
+</body>
+</html>

@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись в салон</title>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_for_menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/frame_style.css"/>
+
+    <link href="static/icon.png" rel="icon" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+    {#______________________________________________________________#}
+    {% macro render_list(title, name, relation) %}
+
+        <details>
+            <summary><b>{{ title }}▸</b></summary>
+            {% set n = len(relation) %}
+            {% for i in range(n) %}
+                {% if relation.iloc[i][3] == title %}
+                    <input type="checkbox" name={{ name }} value='{{ relation.iloc[i][1] }}' id=
+                            {{ name }}{{ i }}>
+                    <label for={{ name }}{{ i }}>{{ relation.iloc[i][1] }}
+                        ({{ relation.iloc[i][2] }}₽)</label>
+                    <br>
+                {% endif %}
+            {% endfor %}
+        </details>
+
+    {% endmacro %}
+
+    <script>$(document).on('ready', function() {
+  var checkboxes = $("input[type=checkbox]");
+  $("#main").on('submit', function(e) {
+    var checker = false;
+    checkboxes.each(function() {
+      if ($(this).prop('checked') == true) {
+        checker = true;
+      }
+    });
+
+    if (checker == false) {
+      e.preventDefault();
+      console.log('не выбран ни один чекбокс, форма не отправлена');
+    } else {
+      console.log('выбран хотя бы 1 чекбокс, форма отправлена');
+    }
+  });
+});</script>
+    {#________________________________________________________________________________#}
+</head>
+<body>
+
+
+<div class=menu>
+    <ul>
+        <li class=active><a href={{ url_for("index") }}>Выбрать услугу</a></li>
+    </ul>
+</div>
+
+<form id="main" method="get" class="decor">
+    <div class="form-inner">
+        <h3>Выберите услугу:</h3>
+        <div class="container">
+            <div style=" width: 430px; ">
+                <form class="form">
+                    {{ render_list('Парикмахер', 'barber' , service) }}
+                    {{ render_list('Маникюр', 'nail' , service) }}
+                    {{ render_list('Шугаринг', 'shugaring' , service) }}
+                    {{ render_list('Визажист', 'makeup' , service) }}
+                    {{ render_list('Косметолог', 'cosmetolog' , service) }}
+
+                    <button formaction="masterpage" class="button_1">Выбрать мастера</button>
+                    <button formaction="datepage" class="button_1">Выбрать дату</button>
+                </form>
+
+            </div>
+        </div>
+
+    </div>
+</form>
+
+</body>
+</html>

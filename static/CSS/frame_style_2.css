@@ -1,0 +1,132 @@
+* {
+   box-sizing: border-box;
+}
+body {
+   background: rgba(212, 239, 192, 0.4);
+   margin:30px;
+   font-size:18px;
+}
+.decor {
+   position: relative;
+   max-width: 650px;
+   background: white;
+   border-radius: 30px;
+}
+
+.form-inner {
+    padding: 30px;
+    background-color: rgba(212, 239, 192, 0.4);
+    border: 2px inset #aaec36;
+    border-radius: 10px;
+    /* сверху | справа | снизу | слева */
+    margin: 2em 2em 2em 2em;
+
+
+}
+
+.decor h3 {
+   margin-top: 0px;
+   padding:45px 0px 0px 50px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   font-size: 24px;
+   color: #707981;
+}
+.form-inner h4 {
+   margin-top: -7px;
+   font-family: 'Roboto', sans-serif;
+   font-weight: 500;
+   font-size: 20px;
+       color: #323336;
+
+}
+
+select {
+    width: 150px;
+    padding: 5px;
+    border-radius: 7px;
+    text-align: center;
+}
+
+
+.button_1 {
+    padding: 5px;
+    border-radius: 4px;
+    font-size: 12pt;
+    border-radius: 9px;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+.button_1:hover {
+    background: rgba(163, 205, 90, 0.14);
+
+}
+
+.button_1:active {
+    background: rgba(163, 205, 90);
+}
+
+
+
+
+
+/*Кнопки*/
+input[type="submit"] {
+    /* сверху | справа | снизу | слева */
+    margin: 2em 0 0 0;
+    text-align: center;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+
+input[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+button[type="submit"]:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+
+}
+
+input[type="submit"], button[type="submit"]:active {
+     transform: translateY(-1px);
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    background: rgba(163, 205, 90);
+}
+
+
+
+input[type="submit"], button[type="submit"] {
+    margin: 2em 2em 2em 2em;
+       border: 3px solid rgba(175, 231, 70, 0.4);
+    text-transform: uppercase;
+    background: rgba(212, 239, 192, 0.4);
+    text-decoration: none;
+    padding: 7px 22px;
+    display: inline-block;
+    border-radius: 100px;
+    transition: all .2s;
+    margin-top: 10px;
+    cursor: pointer;
+}
+
+input[type="date"] {
+    padding: 4px 4px 4px 4px;
+    border-radius: 5px;
+}
+
+.decor p {
+    padding-left: 40px;
+    padding-bottom: 10px;
+   margin-bottom: 10px;
+   line-height: 40px;
+   border-width: 0;
+   border-radius: 20px;
+   font-family: 'Roboto', sans-serif;
+   line-height: 1.1;
+}

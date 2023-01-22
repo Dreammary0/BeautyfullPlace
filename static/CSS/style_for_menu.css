@@ -1,0 +1,48 @@
+/* меню страниц */
+.menu {
+    background-color: #f1f1f1;
+    box-shadow: 4px 5px 10px rgba(0, 0, 0, 0.4);
+    width: 100%;
+}
+
+/*Теперь уберем маркеры со списка и произведем выравнивание его элементов в одну
+линию*/
+.menu li {
+    display: inline-block;
+    vertical-align: top;
+    padding: 10px 0px;
+    color: #6f6d6d;
+}
+
+.menu a {
+    text-decoration: none; /* Убирает подчеркивание для ссылок */
+    color: #6f6d6d;
+    padding: 10px 20px;
+}
+
+/*.menu li:hover {*/
+/*    background-color:  rgba(145, 180, 74, 0.87);*/
+/*    cursor: pointer;*/
+/*    color: #f8f8f8;*/
+/*}*/
+
+.menu ul {
+    padding: 0px;
+}
+
+.active {
+    background-color: rgba(163, 205, 90);
+    color: #f8f8f8;
+}
+
+.active a:visited {
+    color: #f8f8f8;
+}
+
+/*.menu a:hover {*/
+/*    color: #f8f8f8;*/
+/*}*/
+
+.block {
+    padding: 10px 20px;
+}

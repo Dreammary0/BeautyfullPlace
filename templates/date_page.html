@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись в салон</title>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_for_menu.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_for_grid.css"/>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/frame_style_2.css"/>
+
+    <link href="static/icon.png" rel="icon" type="image/x-icon">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+
+
+
+{#__________________________________________________________________________________________________________    #}
+
+{% macro grid_list(name, proceduere_name, relation, iniq_date) %}
+    <div class="form-inner">
+    <div class="master_windows">
+            <h4>Запись к мастеру <b>{{ name }}</b> ({{ proceduere_name }})</h4>
+            {% for date in iniq_date %}
+                <b><h3 style="text-align: center; font-size: 15px; color: black; font-weight: 500;font-size: 17px; padding:0px 0px 0px 0px;
+">{{ date }}</h3></b>
+        <div class="grid">
+        {% set n = len(relation) %}
+        {% for i in range(n) %}
+            {% if relation.loc[i, 'Дата'] == date  %}
+                <div class="{{ i }}">
+                {% for name in relation.dtypes.index %}
+                {% if name=='Запись' %}
+                    {% if relation.loc[i, 'Запись'] == 0 %}
+
+                        <input name ='record_button' value={{relation.loc[i, 'IDOrder']}} type="checkbox" id={{relation.loc[i, 'IDOrder']}}>
+                        <label class="button_1" for={{relation.loc[i, 'IDOrder']}}>{{relation.loc[i, 'Время']}}:00</label>
+
+                    {% else %}
+                        <input  disabled name ='record_button' value={{relation.loc[i, 'IDOrder']}} type="checkbox" id={{relation.loc[i, 'IDOrder']}}>
+                        <label class="button_1" for={{relation.loc[i, 'IDOrder']}}>{{relation.loc[i, 'Время']}}:00</label>
+                    {% endif %}
+                {% endif %}
+                {% endfor %}
+                </div>
+            {% endif %}
+        {% endfor %}
+        </div>
+        <br>
+    {% endfor %}
+</div>
+</div>
+
+{% endmacro %}
+
+<script>$(document).on('ready', function() {
+  var checkboxes = $("input[type=checkbox]");
+  $("#dateform").on('submit', function(e) {
+    var checker = false;
+    checkboxes.each(function() {
+      if ($(this).prop('checked') == true) {
+        checker = true;
+      }
+    });
+
+    if (checker == false) {
+      e.preventDefault();
+      console.log('не выбран ни один чекбокс, форма не отправлена');
+    } else {
+      console.log('выбран хотя бы 1 чекбокс, форма отправлена');
+    }
+  });
+});</script>
+
+
+{#______________________________________________________________________________________________________________    #}
+
+
+</head>
+<body>
+
+<div class=menu>
+    <ul>
+        <li><a href={{ url_for("index") }}>Выбрать услугу</a></li>
+        <li class=active><a>Выбрать время записи</a></li>
+    </ul>
+</div>
+
+
+
+  <form style="padding-left: 40px; padding-bottom: 30px;" class="decor" action="{{ url_for('datepage') }}" method="get">
+              <h3 style="padding: 45px 0 0 8px;">Выберите интервал:</h3>
+            <input type="date"  required="required" placeholder="С какого" name="dateStart">
+            <input type="date" required="required" placeholder="По какое" name="dateEnd">
+            <button type ="submit" name="submitGetDate" style="margin: 0 0 0 0; " value="on">Показать</button>
+  </form>
+
+
+
+   {% if indecator==1 %}
+       <form id="dateform" style="padding: 1px 0 0 0;margin: 10px 0 0 0;" class="decor"
+             action={{ url_for("regpage") }} method="get">
+          {% if len(date_list_list)==0 %}
+              <p>К сожалению, на выбранные даты записи нет!</p>
+          {% else %}
+           {% for i in range(0,len(date_list_list)) %}
+               {{ grid_list(date_list_list[i].loc[1, 'MasterName'],date_list_list[i].loc[1, 'ProcedureName'],date_list_list[i], uniq_date_list[i] ) }}
+           {% endfor %}
+           <input type="submit" class="button_1" style="font-size: 14px;" value="Подтвердить">
+                  {% endif %}
+
+       </form>
+    {% endif %}
+
+</body>
+</html>

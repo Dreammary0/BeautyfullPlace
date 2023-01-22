@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Запись в салон</title>
+    <link rel="stylesheet" type="text/css" href="/static/CSS/style_for_menu.css"/>
+        <link rel="stylesheet" type="text/css" href="/static/CSS/frame_style.css"/>
+
+    <link href="static/icon.png" rel="icon" type="image/x-icon">
+
+</head>
+<body>
+<div class=menu>
+    <ul>
+        <li><a href={{ url_for("index") }}>Выбрать услугу</a></li>
+        <li><a> Выбрать мастера</a></li>
+        <li><a>Выбрать время</a></li>
+        <li class="active"><a>Проверьте данные </a></li>
+
+    </ul>
+</div>
+
+<form class="decor">
+    <div class="form-inner">
+    <form action="{{ url_for('regpage') }}" method="get">
+    <h3>Заполните контактные данные:</h3>
+    <input type=text name=username placeholder='Имя' required="required" value={{name}}>
+    <input type="tel" name=userphone  placeholder='Номер телефона' required="required" value={{name}} >
+
+
+<br>
+<h3>Выбранные услуги:</h3>
+<form class="dop" >
+     {% for i in range(0,len(procedure_list)) %}
+         <p><b>{{ procedure_list[i] }}</b></p>
+         <p><u>Имя мастера: </u>{{ order_list[i].loc[0, 'MasterName'] }}</p>
+         <p><u>Дата записи:</u>
+            {% if len(order_list[i]) == 1%}
+                {{ order_list[i].loc[0, 'OrderData'] }} {{ order_list[i].loc[0, 'OrderTime'] }}:00
+                <br>
+            {% else %}
+                {% for j in range(0,len(order_list[i])) %}
+                    <li>{{ order_list[i].loc[j, 'OrderData'] }} {{ order_list[i].loc[j, 'OrderTime'] }}:00</li>
+                {% endfor %}
+
+            {% endif %}
+         </p>
+            <p><u>Услуги:</u>
+            {% if len(service_list[i+1]) == 1%}
+                {{ service_list[i+1][0] }}
+            {% else %}
+                {% for k in range(0,len(service_list[i+1])) %}
+                    <li>{{ service_list[i+1][k] }}</li>
+                {% endfor %}
+            {% endif %}
+     ____________________________________
+     {% endfor %}
+    </p>
+<p>
+    <b>Сумма чека: {{ check_sum }}0 ₽</b>
+</p>
+
+</form>
+        <input class="button_1" type="submit" name="submitSuccess" value="Подтвердить запись">
+</form>
+    </div>
+</form>
+</body>
+</html>

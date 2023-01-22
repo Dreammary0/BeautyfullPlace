@@ -1,0 +1,70 @@
+.grid {
+    /*display: grid;*/
+    /*grid-template-columns: repeat(6, 30px);*/
+    /*grid-auto-rows: repeat(6, 40px);*/
+    /*grid-gap: 30px 10px;*/
+
+
+      display: grid;
+  grid-template-columns: repeat(auto-fill, 85px);
+  grid-template-rows: 50px 50px;
+  /*grid-column-gap: 1px;*/
+  /*grid-row-gap: 1px;*/
+  justify-items: stretch;
+  align-items: stretch;
+
+}
+.grid > * {
+    /*дизайн*/
+    margin: 2px;
+    align-items: center;
+}
+
+/*.master_windows {*/
+/*    border: 2px inset #aaec36;*/
+/*    border-radius: 10px;*/
+/*    padding-left: 17px;*/
+/*    background: rgba(170, 222, 79, 0.24);*/
+/*    font-family: serif;*/
+/*    font-size: 12pt; !* Размер шрифта в пунктах *!*/
+/*    width: 480px;*/
+/*    height: auto; !* Размеры *!*/
+
+/*}*/
+
+
+.master_windows input[type=checkbox] {
+    position: absolute;
+    top: 25px;
+    left: 25px;
+    z-index: -1;
+}
+
+.master_windows input[type=checkbox]:disabled ~ label{
+    opacity: 0.5;
+    cursor: auto;
+    background-color: rgba(163, 205, 90, 0.14);
+}
+
+
+
+.master_windows label {
+    cursor: pointer;
+    user-select: none;
+}
+
+.master_windows label {
+    /*background: rgba(163, 205, 90, 0.14);*/
+    padding: 10px;
+    background-color: white;
+    border: 2px solid darkgreen;
+    font-family: serif;
+    border-radius: 7px;
+    text-align: center;
+}
+
+.master_windows input[type=checkbox]:checked ~ label {
+    background-color: rgba(163, 205, 90);
+}
+
+
