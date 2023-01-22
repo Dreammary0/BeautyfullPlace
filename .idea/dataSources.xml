@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="beautyfull" uuid="21e6b6d8-8ef7-4ec8-b706-ab210afdea13">
+    <data-source source="LOCAL" name="beautyfull" uuid="451a688f-996a-4134-828f-fcb4ebddd449">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:C:\Users\admin\Desktop\Лекции\4 курс\СИТ\BeautyfullPlace\beautyfull.sqlite</jdbc-url>
+      <jdbc-url>jdbc:sqlite:C:\Users\admin\Desktop\Лекции\4 курс\СИТ\SIT_2022-23\final_project\beautyfull.sqlite</jdbc-url>
       <working-dir>$ProjectFileDir$</working-dir>
       <libraries>
         <library>
